@@ -25,9 +25,9 @@ model {
                 proguardFiles.add(file('proguard-android.txt'))
             }
         }
+
     }
 }
 
 dependencies {
-
 }

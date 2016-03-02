@@ -1,11 +1,13 @@
 package com.seniorzhai.blur;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
 /**
  * Created by zhai on 16/3/1.
  */
 public final class Blur extends BlurNative {
+
     private static Bitmap buildBitmap(Bitmap bitmap, boolean canReuseInBitmap) {
         Bitmap rBitmap;
         if (canReuseInBitmap) {
@@ -14,6 +16,17 @@ public final class Blur extends BlurNative {
             rBitmap = bitmap.copy(bitmap.getConfig(), true);
         }
         return (rBitmap);
+    }
+
+    public static Bitmap blurRenderScript(Context context, Bitmap original, int radius, boolean canReuseInBitmap) {
+        if (radius < 1) {
+            return null;
+        }
+        Bitmap bitmap = buildBitmap(original, canReuseInBitmap);
+        if (radius == 1) {
+            return bitmap;
+        }
+        return BlurBuilder.blur(context, bitmap, radius);
     }
 
     public static Bitmap blurNatively(Bitmap original, int radius, boolean canReuseInBitmap) {
