@@ -10,7 +10,15 @@ model {
             targetSdkVersion.apiLevel = 23
             versionCode = 1
             versionName "1.0"
+            renderscriptTargetApi = 20
+            renderscriptSupportModeEnabled = true
         }
+
+        ndk {
+            moduleName = "blurNative"
+            ldLibs.addAll(["log", "jnigraphics"])
+        }
+
         buildTypes {
             release {
                 minifyEnabled = false
